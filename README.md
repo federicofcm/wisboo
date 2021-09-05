@@ -1,2 +1,2 @@
 # wisboo
-Wisboo challeng
+Wisboo challenge
