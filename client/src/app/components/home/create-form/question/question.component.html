@@ -1,0 +1,23 @@
+<div fxFlex fxLayoutAlign="center center" fxLayoutGap="20px">
+    <mat-card fxFlex style="margin:2em;">
+        <form [formGroup]="form">
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de pregunta</mat-label>
+                    <mat-select formControlName="questionType">
+                      <mat-option *ngFor="let questionType of questionTypes" [value]="questionType">{{questionType}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field >
+                    <mat-label>Pregunta</mat-label>
+                    <input matInput autocomplete="off" formControlName="question">
+                </mat-form-field>
+                <mat-form-field *ngFor="let option of options">
+                    <mat-label>{{"Opcion" + optionIndex}}</mat-label>
+                    <input matInput autocomplete="off">
+                </mat-form-field>
+                <button mat-raised-button color="primary">Agregar opcion</button>
+            </div>
+        </form>
+    </mat-card>
+</div>
