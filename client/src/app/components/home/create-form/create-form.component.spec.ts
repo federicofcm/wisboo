@@ -15,7 +15,7 @@ export class CreateFormComponent implements OnInit {
 
   constructor(private fb : FormBuilder) {
     this.form = this.fb.group({
-      title: ['', Validators.required],
+      name: ['', Validators.required],
       description: [''],
       questions: this.fb.array([
         this.createQuestion()

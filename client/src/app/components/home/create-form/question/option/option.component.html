@@ -1,6 +1,10 @@
-<div formArrayName="options" *ngFor="let option of this.optionsArray['controls']; let i = index;" fxLayout="column" style="margin-bottom: 25px;">
-    <mat-form-field >
-        <mat-label [formGroupName]="i">Opcion</mat-label>
-        <input matInput autocomplete="off">
-    </mat-form-field>
+<div fxFlex fxLayoutAlign="center center">
+    <form [formGroup]="questionFormGroup" fxFlex="100">
+        <div formArrayName="options" *ngFor="let option of this.optionsArray['controls']; let i = index;" fxLayout="column" style="margin-bottom: 25px;">
+            <mat-form-field [formGroupName]="i">
+                <mat-label>Opcion {{i+1}}</mat-label>
+                <input matInput autocomplete="off" formControlName="value">
+            </mat-form-field>
+        </div>
+    </form>
 </div>

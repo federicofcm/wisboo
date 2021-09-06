@@ -23,9 +23,9 @@
                 <mat-label>Pregunta</mat-label>
                 <input matInput autocomplete="off" formControlName="text">
             </mat-form-field>
-            <!--<app-option [form]="this.form"></app-option>-->
+            <app-option [form]="this.form" [questionIndex]="i" [questionFormGroup]="this.getQuestionsGroup(i)"></app-option>
             <div fxLayoutAlign="center">
-              <button mat-raised-button color="primary" (click)="this.addOption()">
+              <button mat-raised-button color="primary" (click)="this.addOption(i)">
                 <mat-icon>add</mat-icon>
                 Agregar opcion
               </button>

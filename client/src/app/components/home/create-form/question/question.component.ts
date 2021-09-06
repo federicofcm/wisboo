@@ -34,43 +34,34 @@ export class QuestionComponent implements OnInit {
     }
   ];
 
-  optionNumber: number;
-
   get questionsArray(): FormArray {
     return this.form.get('questions') as FormArray;
   }
 
-  get optionsArray(): FormArray {
-    return this.form.get('options') as FormArray;
+  getQuestionsGroup(i : number): FormGroup {
+    return this.questionsArray.at(i) as FormGroup;
+  }
+
+  getOptionsArray(i : number): FormArray {
+    return this.questionsArray.at(i).get("options") as FormArray;
   }
 
   constructor(private fb : FormBuilder) { 
-    this.optionNumber = 1;
-    this.form = this.fb.group({
-      options: this.fb.array([
-        this.createOption()
-      ])
-    })
-    console.log("logging form in constructor", this.form);
+    
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe(formValue => {
-      this.onChangeForm.emit(formValue);
-    })
-    this.onChangeForm.emit(this.form.value);
+    this.form.value.questions.forEach((question: {}, index: number) => {
+      this.getOptionsArray(index).push(this.createOption());
+    });
   }
 
   createOption(): FormGroup {
-    return this.fb.group({
-      index: [this.optionNumber++], 
-      value: ["", Validators.required]
-    })
+    return this.fb.group({value: ["", Validators.required]});
   }
 
-  addOption(): void {
-    console.log(this.optionsArray)
-    this.optionsArray.push(this.createOption());
+  addOption(i: number): void {
+    this.getOptionsArray(i).push(this.createOption());
   }
 
   removeQuestion(index: number): void {

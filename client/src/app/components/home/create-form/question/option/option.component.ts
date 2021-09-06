@@ -8,15 +8,20 @@ import { FormGroup, FormArray } from '@angular/forms';
 })
 export class OptionComponent implements OnInit {
   @Input() form: FormGroup;
+  @Input() questionIndex: number;
+  @Input() questionFormGroup: FormGroup;
+
+  get questionsArray(): FormArray {
+    return this.form.get('questions') as FormArray;
+  }
 
   get optionsArray(): FormArray {
-    return this.form.get('options') as FormArray;
+    return this.questionsArray.at(this.questionIndex).get("options") as FormArray;
   }
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log("loggin from option component", this.form);
   }
 
 }
