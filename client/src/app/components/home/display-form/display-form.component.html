@@ -1,0 +1,33 @@
+<mat-card fxFlex="100">
+    <mat-card-header style="background-color:blue; padding:20px;">
+        <mat-card-title style="color:beige;">{{form.title}}</mat-card-title>
+        <mat-card-subtitle style="color:beige;">{{form.description}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div fxLayout="column" fxLayoutAlign="center strech" fxLayoutGap="20px" *ngFor="let question of form.questions" >
+            <span [ngSwitch]="question.questionType">
+                <span *ngSwitchCase="'Texto'">
+                    <h1>{{question.text}}</h1>
+                    <input matInput autocomplete="off">
+                </span>
+                <span *ngSwitchCase="'Seleccion multiple'">
+                    <h1>{{question.text}}</h1>
+                    <mat-list-item *ngFor="let option of question.options">
+                        <mat-checkbox>{{option}}</mat-checkbox>
+                    </mat-list-item>
+                </span>
+                <span *ngSwitchCase="'Seleccion simple'">
+                    <h1>{{question.text}}</h1>
+                    <mat-radio-group
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group">
+                        <mat-radio-button class="example-radio-button" *ngFor="let option of question.options">
+                            {{option}}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </span>
+            </span>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,25 +1,46 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
-import { CreateFormComponent } from './create-form.component';
+@Component({
+  selector: 'app-create-form',
+  templateUrl: './create-form.component.html',
+  styleUrls: ['./create-form.component.css']
+})
+export class CreateFormComponent implements OnInit {
+  form: FormGroup;
 
-describe('CreateFormComponent', () => {
-  let component: CreateFormComponent;
-  let fixture: ComponentFixture<CreateFormComponent>;
+  get questionsArray(): FormArray {
+    return this.form.get('questions') as FormArray;
+  }
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CreateFormComponent ]
+  constructor(private fb : FormBuilder) {
+    this.form = this.fb.group({
+      title: ['', Validators.required],
+      description: [''],
+      questions: this.fb.array([
+        this.createQuestion()
+      ])
     })
-    .compileComponents();
-  });
+  }
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CreateFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  addQuestion(): void {
+    this.questionsArray.push(this.createQuestion());
+  }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  createQuestion(): FormGroup {
+    return this.fb.group({
+      questionType: ['Seleccion multiple'],
+      text: [''],
+      options: ['']
+    })
+  }
+
+  ngOnInit(): void {
+    console.log(this.form);
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
+  }
+
+}
