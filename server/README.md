@@ -1,4 +1,4 @@
-**Run development with nodemon**
+**Run development with nodemon** \
 ```> npm run dev``` \
-**Run tests with nodemon**
+**Run tests with nodemon** \
 ```> npm run test```
