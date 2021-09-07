@@ -10,6 +10,9 @@ export interface FormDocument extends mongoose.Document {
     updatedAt: Date;
 } 
 
+/**
+ * Create form schema for model and add validations
+ */
 const FormSchema = new mongoose.Schema(
     {
         name: {type: String, required: true},

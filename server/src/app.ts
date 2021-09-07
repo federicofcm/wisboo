@@ -3,11 +3,20 @@ import config from 'config';
 import log from './logger';
 import connect from './db/connect';
 import routes from "./routes";
+import cors from 'cors';
 
 const port = config.get("port") as number;
 const host = config.get("host") as string;
 
 const app = express();
+
+// Add a list of allowed origins.
+const allowedOrigins = ['http://localhost:4200'];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+app.use(cors(options));
 
 // Parses incoming requests with JSON payloads
 app.use(express.json());
@@ -20,3 +29,5 @@ app.listen(port, host, () => {
 
   routes(app);
 });
+
+export default app;

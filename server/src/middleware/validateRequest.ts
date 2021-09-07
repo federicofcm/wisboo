@@ -16,8 +16,8 @@ const validate = (schema: AnyObjectSchema) => async (
 
     return next();
   } catch (e) {
-    log.error(e as Error);
-    return res.status(400).send((e as Error).message);
+    log.error("Validation error: %s", (e as Error).message);
+    return res.status(409).send((e as Error).message);
   }
 };
 
