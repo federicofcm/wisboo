@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 //Flexbox
@@ -37,6 +38,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatRadioModule,
     MatCheckboxModule,
     MatIconModule,
+    MatSnackBarModule,
     FlexLayoutModule,
     HttpClientModule
   ],
@@ -53,6 +55,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatRadioModule,
     MatIconModule,
     MatCheckboxModule,
+    MatSnackBarModule,
     FlexLayoutModule,
     HttpClientModule
   ]

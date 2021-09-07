@@ -25,7 +25,7 @@ export class QuestionComponent implements OnInit {
       name: "Seleccion multiple"
     },
     {
-      value: 'Seleccion multiple',
+      value: 'Seleccion simple',
       name: "Seleccion simple"
     },
     {
@@ -62,6 +62,10 @@ export class QuestionComponent implements OnInit {
 
   addOption(i: number): void {
     this.getOptionsArray(i).push(this.createOption());
+  }
+
+  removeOption(questionIndex: number, optionIndex: number): void {
+    this.getOptionsArray(questionIndex).removeAt(optionIndex);
   }
 
   removeQuestion(index: number): void {

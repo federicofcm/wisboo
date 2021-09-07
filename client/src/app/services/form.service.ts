@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import Form from '../interfaces/form';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +15,9 @@ export class FormService {
 
   constructor(private httpClient : HttpClient) { }
 
-  postForm(form : Form) {
+  postForm(form : Form): Observable<HttpResponse<Form>> {
     console.log("Sending request", form);
-    const response = this.httpClient.post<Form>('http://localhost:1337/api/forms', form)
-    .subscribe(
-      data => {this.responseForm = data;},
-      error => {console.log("Error while sending request:", error.message);}
-      );
+    return this.httpClient.post<Form>('http://localhost:1337/api/forms', form, { observe: 'response'} );
   }
 
   updateForm(form: Form) {

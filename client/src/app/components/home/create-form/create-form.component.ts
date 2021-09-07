@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { FormService } from 'src/app/services/form.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-form',
@@ -15,10 +16,10 @@ export class CreateFormComponent implements OnInit {
     return this.form.get('questions') as FormArray;
   }
 
-  constructor(private fb : FormBuilder, private _formService : FormService) {
+  constructor(private fb : FormBuilder, private formService : FormService, private snackBar: MatSnackBar) {
     this.form = this.fb.group({
       name: ['', Validators.required],
-      description: [''],
+      description: ['', Validators.required],
       questions: this.fb.array([
         this.createQuestion()
       ])
@@ -32,21 +33,29 @@ export class CreateFormComponent implements OnInit {
   createQuestion(): FormGroup {
     return this.fb.group({
       questionType: ['Seleccion multiple'],
-      text: [''],
+      text: ['', Validators.required],
       options: this.fb.array([])
     })
   }
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe(formValue => {
-      this._formService.updateForm(formValue);
+      this.formService.updateForm(formValue);
     })
-    this._formService.updateForm(this.form.value);
+    this.formService.updateForm(this.form.value);
   }
 
   onSubmit() {
-    console.log(this.form.value);
-    this._formService.postForm(this.form.value);
+    this.formService.postForm(this.form.value).subscribe(
+      response => {if (response.status == 200) this.showSnackBar("Encuesta creada con exito!")},
+      error => this.showSnackBar(error.message)
+    );
+  }
+
+  showSnackBar(message: string) {
+    this.snackBar.open(message, "OK" ,{
+      duration: 5000,
+    });
   }
 
 }

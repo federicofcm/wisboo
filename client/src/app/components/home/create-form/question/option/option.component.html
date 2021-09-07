@@ -1,10 +1,15 @@
 <div fxFlex fxLayoutAlign="center center">
     <form [formGroup]="questionFormGroup" fxFlex="100">
         <div formArrayName="options" *ngFor="let option of this.optionsArray['controls']; let i = index;" fxLayout="column" style="margin-bottom: 25px;">
-            <mat-form-field [formGroupName]="i">
-                <mat-label>Opcion {{i+1}}</mat-label>
-                <input matInput autocomplete="off" formControlName="value">
-            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="start">
+                <mat-form-field fxFlex=95 [formGroupName]="i">
+                    <mat-label>Opcion {{i+1}}</mat-label>
+                    <input matInput autocomplete="off" formControlName="value">
+                </mat-form-field>
+                <button fxFlex=5 mat-icon-button color="warn" (click)="this.removeOption(i)">
+                  <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+              </div>
         </div>
     </form>
 </div>

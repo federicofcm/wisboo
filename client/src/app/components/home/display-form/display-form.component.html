@@ -28,12 +28,11 @@
                             <span style="color: #808080;">
                                 {{question.value.text}}
                             </span>
-                            <mat-radio-group
-                                 class="example-radio-group">
-                                <mat-radio-button class="example-radio-button" *ngFor="let option of this.getOptions(i).value" [value]="option.value">
+                            <mat-list-item *ngFor="let option of this.getOptions(i).value">
+                                <mat-radio-button *ngIf="option.value" class="example-radio-button">
                                     {{option.value}}
                                 </mat-radio-button>
-                            </mat-radio-group>
+                            </mat-list-item>
                         </div>
                     </mat-card>
                 </div>

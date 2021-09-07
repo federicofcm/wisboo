@@ -27,7 +27,7 @@
                     Agregar pregunta
                   </button>
                 </div>
-                <button type="submit" mat-raised-button color="primary">Crear</button>
+                <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Crear</button>
             </div>
         </form>
     </mat-card-content>

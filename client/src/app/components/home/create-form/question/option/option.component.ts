@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 
 @Component({
@@ -11,6 +11,8 @@ export class OptionComponent implements OnInit {
   @Input() questionIndex: number;
   @Input() questionFormGroup: FormGroup;
 
+  @Output() onRemoveOption = new EventEmitter<number>();
+
   get questionsArray(): FormArray {
     return this.form.get('questions') as FormArray;
   }
@@ -22,6 +24,10 @@ export class OptionComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  removeOption(optionIndex: number): void {
+    this.onRemoveOption.emit(optionIndex);
   }
 
 }

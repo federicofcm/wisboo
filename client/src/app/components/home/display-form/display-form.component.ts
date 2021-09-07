@@ -20,12 +20,12 @@ export class DisplayFormComponent implements OnInit {
     return this.questionsArray.at(i).get("options") as FormArray;
   }
 
-  constructor(private _formService : FormService, private fb : FormBuilder) { 
+  constructor(private formService : FormService, private fb : FormBuilder) { 
 
   }
 
   ngOnInit(): void {
-    this._formService.currentForm.subscribe(message => {
+    this.formService.currentForm.subscribe(message => {
       this.form = this.createForm(message);
     });
   }
