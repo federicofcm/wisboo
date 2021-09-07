@@ -1,5 +1,5 @@
 <mat-card fxFlex="100">
-    <mat-card-header style="background-color:blue; padding: 20px;" >
+    <mat-card-header style="background-color:#3f51b5; padding: 20px; height: 70px;" >
         <mat-card-title style="color:beige;">Creacion de encuesta</mat-card-title>
         <mat-card-subtitle style="color:beige;">Ingrese aqui los campos de su encuesta</mat-card-subtitle>
     </mat-card-header>
@@ -19,6 +19,11 @@
                 <mat-form-field>
                     <mat-label>Descripcion</mat-label>
                     <input matInput autocomplete="off" formControlName="description">
+                    <mat-error *ngIf="this.form.get('description')?.errors">
+                      <b>
+                        Debe completar el campo
+                      </b>
+                    </mat-error>
                 </mat-form-field>
                 <app-question [form]="this.form"></app-question>
                 <div fxLayoutAlign="start" style="margin-top: 20px;">
